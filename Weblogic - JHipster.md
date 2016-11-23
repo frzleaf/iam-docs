@@ -1,5 +1,5 @@
 # 1. Project Jhipster
-     �?m b?o project d� c� file ApplicationWebXml
+     Đảm bảo project đã có file ApplicationWebXml
 ```
 public class ApplicationWebXml extends SpringBootServletInitializer {
 
@@ -13,8 +13,8 @@ public class ApplicationWebXml extends SpringBootServletInitializer {
     }
 }
 ```
-# 2. Th�m WEB-INF
-     T?o m?i thu m?c WEB-INF n?u chua c� trong folder webapp v� th�m 2 file
+# 2. Thêm WEB-INF
+     Tạo mới thư mục WEB-INF nếu chưa có trong folder webapp và thêm 2 file
 `dispatcherServlet-servlet.xml`
 ```
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -56,5 +56,5 @@ http://xmlns.oracle.com/weblogic/weblogic-web-app/1.4/weblogic-web-app.xsd">
 # 3. Build
      Build file war jhipster:
      $ mvn package
-     ho?c 
+     hoặc 
      $ gradle bootRepackage
