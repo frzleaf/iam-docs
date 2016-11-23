@@ -1,11 +1,11 @@
-# 1. C�i Shibboleth
-- T?i Shibboleth IdP 3
-- C�i Shibboleth v�o thu m?c /opt/shibboleth-idp
+# 1. Cài Shibboleth
+- Tải Shibboleth IdP 3
+- Cài Shibboleth vào thư mục /opt/shibboleth-idp
 
-## **Chuy?n sang thu m?c c�i shibboleth tru?c khi th?c hi?n c�c bu?c ti?p theo**
+## **Chuyển sang thư mục cài shibboleth trước khi thực hiện các bước tiếp theo**
 
-# 2. Config v?i ADFS
-#### a. S?a `conf/metadata-providers.xml` v?i link m� b�n ADFS cung c?p
+# 2. Config với ADFS
+#### a. Sửa `conf/metadata-providers.xml` với link mà bên ADFS cung cấp
 ```
 ...
 <MetadataProvider id="HTTPMetadata" xsi:type="FileBackedHTTPMetadataProvider"
@@ -19,8 +19,8 @@ metadataURL="https://leth.teca.vn/FederationMetadata/2007-06/FederationMetadata.
 </MetadataProvider>
 ...
 ```
-#### b. S?a conf/ldap.properties c�c gi� tr? c?n d? s? d?ng ldap
-M?u:
+#### b. Sửa conf/ldap.properties các giá trị cần để sử dụng ldap
+Mẫu:
 ```
 ...
 # LDAP authentication configuration, see authn/ldap-authn-config.xml
@@ -100,8 +100,8 @@ idp.attribute.resolver.LDAP.returnAttributes    =  cn,email,macoquan,madonvi,uid
 #idp.pool.LDAP.failFastInitialize               = false
 ...
 ```
-#### c. S?a `conf/attribute-resolver.xml`
-M?u:
+#### c. Sửa `conf/attribute-resolver.xml`
+Mẫu:
 ```
 ...
  <resolver:AttributeDefinition id="cas-users-email" xsi:type="ad:Simple" sourceAttributeID="cas-users-email">
@@ -209,8 +209,8 @@ M?u:
     </resolver:DataConnector>
 ...
 ```
-#### d. S?a `conf/idp.properties`
-M?u:
+#### d. Sửa `conf/idp.properties`
+Mẫu:
 ```
 ...
 # Load any additional property resources from a comma-delimited list
@@ -428,8 +428,8 @@ shibcas.serverName = https://chai65.iam:8443
 
 ...
 ```
-### e. S?a file `attribute-filter.xml`
-M?u:
+### e. Sửa file `attribute-filter.xml`
+Mẫu:
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
@@ -500,15 +500,15 @@ M?u:
 </AttributeFilterPolicyGroup>
 ```
 
-# 3. Config v?i CAS Authn
-> C�i d?t theo hu?ng d?n t?i link: [shib-cas-authn3](https://github.com/frzleaf/shib-cas-authn3)
+# 3. Config với CAS Authn
+> Cài đặt theo hướng dẫn tại link: [shib-cas-authn3](https://github.com/frzleaf/shib-cas-authn3)
 
-#### a. Th�m plugin Shib-cas-authn3
-- T?i source [shib-cas-authn3](https://github.com/frzleaf/shib-cas-authn3) v?
-- Copy 2 file xml t? thu m?c IDP_HOME sao cho kh?p v?i du?ng d?n trong thu m?c c�i Shibboleth
+#### a. Thêm plugin Shib-cas-authn3
+- Tải source [shib-cas-authn3](https://github.com/frzleaf/shib-cas-authn3) về
+- Copy 2 file xml từ thư mục IDP_HOME sao cho khớp với đường dẫn trong thư mục cài Shibboleth
 
 #### b. Config file `idp.properties`
-Config/Th�m v�o do?n sau:
+Config/Thêm vào đoạn sau:
 
 ```
 ...
@@ -529,8 +529,8 @@ shibcas.serverName = https://shibserver.example.edu
 # shibcas.casToShibTranslators = com.your.institution.MyCustomNamedTranslatorClass
 ...
 ```
-#### c. Thay d?i file `general-authn.xml`
-Th�m module dang nh?p b?ng CAS b?ng c�ch th�m bean `authn/Shibcas` v�o `conf/authn/general-authn.xml`:
+#### c. Thay đổi file `general-authn.xml`
+Thêm module đăng nhập bằng CAS bằng cách thêm bean `authn/Shibcas` vào `conf/authn/general-authn.xml`:
 ```xml
 ...
     <util:list id="shibboleth.AvailableAuthenticationFlows">
@@ -541,16 +541,16 @@ Th�m module dang nh?p b?ng CAS b?ng c�ch th�m bean `authn/Shibcas` v�o `conf/aut
                 p:nonBrowserSupported="false" />
 ...
 ```
-#### d. Copy thu vi?n
-Plugin n�y d�ng d?n thu vi?n cas client, n�n copy c? thu vi?n shib-cas-authenticator v� cas-client-core v�o `edit-webapp/WEB-INF/lib/`
+#### d. Copy thư viện
+Plugin này dùng đến thư viện cas client, nên copy cả thư viện shib-cas-authenticator và cas-client-core vào `edit-webapp/WEB-INF/lib/`
 - <https://github.com/frzleaf/shib-cas-authn3/releases/download/v3.0.0/shib-cas-authenticator-3.0.0.jar>
 - <https://github.com/frzleaf/shib-cas-authn3/releases/download/v3.0.0/cas-client-core-3.3.3.jar>
 
-#### e. Build l?i file war
-Ch?y file `bin/build.sh`(Unix-like) ho?c `bin\build.bat`(Windows) d? build l?i file `idp.war`
+#### e. Build lại file war
+Chạy file `bin/build.sh`(Unix-like) hoặc `bin\build.bat`(Windows) để build lại file `idp.war`
 
-# 4. Build file war d? deploy tr�n Weblogic
-- T?o file `edit-webapp/WEB-INF/weblogic.xml`:
+# 4. Build file war để deploy trên Weblogic
+- Tạo file `edit-webapp/WEB-INF/weblogic.xml`:
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <weblogic-web-app
@@ -564,7 +564,7 @@ Ch?y file `bin/build.sh`(Unix-like) ho?c `bin\build.bat`(Windows) d? build l?i f
     </container-descriptor>
 </weblogic-web-app>
 ```
-- Ch?y file `bin/build.sh` d? build l?i file `war/idp.war`
-- M? weblogic, deploy file `war/idp.war` v?a t?o
+- Chạy file `bin/build.sh` để build lại file `war/idp.war`
+- Mở weblogic, deploy file `war/idp.war` vừa tạo
 
-> N?u trong qu� tr�nh deploy, x?y ra l?i javax.xml... th� x�a file xml-apis* trong thu m?c `edit-webapp/WEB-INF/lib` d? build l?i
+> Nếu trong quá trình deploy, xảy ra lỗi javax.xml... thì xóa file xml-apis* trong thư mục `edit-webapp/WEB-INF/lib` để build lại
