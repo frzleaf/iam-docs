@@ -1,5 +1,5 @@
-### 1. Th�m file weblogic.xml
-T?o file WEB-INF/weblogic.xml n?i dung nhu sau:
+### 1. Thêm file weblogic.xml
+Tạo file WEB-INF/weblogic.xml nội dung như sau:
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <wls:weblogic-web-app xmlns:wls="http://www.bea.com/ns/weblogic/weblogic-web-app"
@@ -13,16 +13,16 @@ T?o file WEB-INF/weblogic.xml n?i dung nhu sau:
     </wls:container-descriptor>
 </wls:weblogic-web-app>
 ```
-### 2. S?a thu vi?n
-X�a thu vi?n: /WEB-INF/lib/xml-apis*.jar
+### 2. Sửa thư viện
+Xóa thư viện: /WEB-INF/lib/xml-apis*.jar
 ### 3. Config Log4j
-Copy file `WEB-INF/classes/log4j.xml` v�o `/etc/cas/`
+Copy file `WEB-INF/classes/log4j.xml` vào `/etc/cas/`
 
-Th�m d�ng n�y v�o file `cas.properties`:
+Thêm dòng này vào file `cas.properties`:
 ```
 ...
 log4j.config.location=/etc/cas/log4j.xml
 ...
 ```
 ### 4. Build
-Build l?i file cas.war v� deploy tr�n Weblogic
+Build lại file cas.war và deploy trên Weblogic
